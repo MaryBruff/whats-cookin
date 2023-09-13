@@ -17,7 +17,7 @@ import {
   buildSearchFail,
 } from "./domUpdates.js";
 
-import { filterByTag, searchRecipes } from "../src/recipes.js";
+import { filterByTag, searchRecipes, getIngredientNames, calculateCost } from "../src/recipes.js";
 const activeTags = [];
 let currentUser;
 let activeRecipes;
@@ -46,7 +46,7 @@ window.addEventListener("load", function () {
     };
 
     loadUser(res["0"].users);
-    console.log(currentUser);
+   
     createRecipeCards(res["2"].recipes);
     activeRecipes = [...res["2"].recipes];
   });
@@ -80,7 +80,9 @@ searchButton.addEventListener("click", function (event) {
 recipeArea.addEventListener("click", function (event) {
   let recipeClicked = event.target.parentElement.id;
   let foundRecipe = locateRecipe(recipeClicked, data.recipes);
-  buildRecipeCard(foundRecipe, data.ingredients);
+  let recipeIngredients = getIngredientNames(foundRecipe, data.ingredients);
+  let cost = calculateCost(foundRecipe, data.ingredients)
+  buildRecipeCard(foundRecipe, data.ingredients, recipeIngredients, cost);
   displayRecipeTag(recipeClicked, currentUser, data.recipes);
   displayRecipeCard();
 });
