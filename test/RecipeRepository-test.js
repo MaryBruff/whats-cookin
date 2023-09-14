@@ -60,7 +60,7 @@ let recipe0, recipe1, recipe2, recipe3, recipe4;
   });
 
   describe("Search Recipes", () => {
-    it("Should search recipes when given any part of a recipes name e.g. Chocolate is in 'Chocolate Chip Cookies' and 'Chocolate Cake'", () => {
+    it("Should search rexcipes when given any part of a recipes name e.g. Chocolate is in 'Chocolate Chip Cookies' and 'Chocolate Cake'", () => {
       const searchedRecipe = searchRecipes("chocolate", recipeTestData);
       expect(searchedRecipe).to.deep.equal([
         recipe0,
