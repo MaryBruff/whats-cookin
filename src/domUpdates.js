@@ -8,9 +8,7 @@ const recipeCard = document.querySelector("#recipeCardBlowup");
 const recipeInstructionsSection = document.querySelector(
   "#recipeCardInstructions"
 );
-const recipeCardClose = document.querySelector(".close");
 const tagSection = document.querySelector(".tag-area");
-const recipeCardBookmark = document.querySelector(".bookmark");
 const recipeCardBookmarkAdd = document.querySelector(".icon-bookmark");
 const recipeCardBookmarkDelete = document.querySelector(".solid-bookmark");
 
@@ -70,14 +68,13 @@ const buildRecipeTags = (foundRecipe) => {
   });
 };
 
-const buildRecipeCost = (foundRecipe, ingredients) => {
-  let cost = calculateCost(foundRecipe, ingredients);
+const buildRecipeCost = (foundRecipe, ingredients, cost) => {
   recipeCost.innerText = `The total cost is $${cost}`;
 };
 
-const buildIngredients = (foundRecipe, ingredients) => {
+const buildIngredients = (foundRecipe, ingredients, recipeIngredients) => {
   recipeIngredientsArea.innerHTML = "";
-  let recipeIngredients = getIngredientNames(foundRecipe, ingredients);
+  
   let ingredientAmounts = foundRecipe.ingredients.map((ingredient) => {
     return `${ingredient.quantity.amount} ${ingredient.quantity.unit} `;
   });
@@ -98,14 +95,14 @@ const buildInstructions = (foundRecipe) => {
   });
 };
 
-const buildRecipeCard = (recipe, ingredients) => {
+const buildRecipeCard = (recipe, ingredients, recipeIngredients, cost) => {
   recipeCardBookmarkAdd.setAttribute("id", recipe.id);
   recipeCardBookmarkDelete.setAttribute("id", recipe.id);
   buildRecipeTitle(recipe);
   buildRecipeImage(recipe);
   buildRecipeTags(recipe);
-  buildRecipeCost(recipe, ingredients);
-  buildIngredients(recipe, ingredients);
+  buildRecipeCost(recipe, ingredients, cost);
+  buildIngredients(recipe, ingredients, recipeIngredients);
   buildInstructions(recipe);
 };
 
@@ -122,7 +119,6 @@ const displayRecipeArea = () => {
 };
 
 const saveRecipe = (id, user) => {
-  // let foundRecipe = locateRecipe(id, recipes);
   user.recipesToCook.push(id);
 };
 
@@ -134,8 +130,6 @@ const deleteRecipe = (idClicked, user) => {
 };
 
 const displayRecipeTag = (id, currentUser, recipes) => {
-  // let foundRecipe = locateRecipe(id, recipes);
-
   let savedStatus = currentUser.recipesToCook.includes(id);
   if (savedStatus === true) {
     recipeCardBookmarkAdd.classList.toggle("hidden", true);
