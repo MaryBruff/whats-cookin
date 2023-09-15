@@ -36,8 +36,12 @@ body {
   margin-left: 5%;
 }
 
-#search-button {
-  font-size: 16pt;
+#searchInput{
+  font-size: 12pt
+}
+
+#searchButton {
+  font-size: 12pt
 }
 
 h1 {
@@ -62,7 +66,7 @@ h1 {
   line-height: normal;
   background-color: #e9f0e7;
   border: 2px solid #3eb23e;
-  border-radius: 25%;
+  border-radius: 45%;
   font-family: 'Kanit', sans-serif;
   cursor: pointer;
 }
@@ -85,6 +89,7 @@ h1 {
   cursor: pointer;
   border: solid green 2px;
   box-shadow: 10px 10px 5px 3px rgb(8, 50, 8);
+  animation: fadeIn 3s;
 }
 
 .recipe-title {
