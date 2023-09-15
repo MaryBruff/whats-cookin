@@ -1,5 +1,6 @@
 //NOTE: Data model and non-dom manipulating logic will live in this file.
 import "./styles.css";
+import "./print-styles.css"
 import "./images/bookmark-regular.svg";
 import "./images/bookmark-solid.svg";
 import "./images/x-solid.svg";
@@ -11,7 +12,6 @@ import {
   buildRecipeCard,
   displayRecipeCard,
   displayRecipeArea,
-  saveRecipe,
   deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
