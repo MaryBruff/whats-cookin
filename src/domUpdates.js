@@ -74,7 +74,7 @@ const buildRecipeCost = (foundRecipe, ingredients, cost) => {
 
 const buildIngredients = (foundRecipe, ingredients, recipeIngredients) => {
   recipeIngredientsArea.innerHTML = "";
-  
+
   let ingredientAmounts = foundRecipe.ingredients.map((ingredient) => {
     return `${ingredient.quantity.amount} ${ingredient.quantity.unit} `;
   });
@@ -147,6 +147,32 @@ const buildSearchFail = () => {
   recipeArea.appendChild(searchFail);
 };
 
+const updateActiveTags = (tag, activeTags) => {
+  let tagId = tag.id;
+  tag.classList.toggle("tag-active");
+  if (!activeTags.includes(tagId)) {
+    activeTags.push(tagId);
+  } else {
+    let index = activeTags.indexOf(tagId);
+    activeTags.splice(index, 1);
+  }
+  return activeTags;
+};
+
+const updateUser = (users, currentUser) => {
+  return users.find((user) => {
+    if (user.id === currentUser.id) {
+      return user;
+    }
+  });
+};
+
+const updateActiveRecipes = (currentUser, data) => {
+  return currentUser.recipesToCook.map((recipeId) => {
+    let wholeRecipe = locateRecipe(recipeId, data.recipes);
+    return wholeRecipe;
+  });
+};
 // elementsToMakeAccessible.forEach(element => {
 //   element.addEventListener('keydown', function (event) {
 //     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
@@ -173,4 +199,7 @@ export {
   deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
+  updateActiveTags,
+  updateUser,
+  updateActiveRecipes,
 };
