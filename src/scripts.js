@@ -87,11 +87,6 @@ recipeArea.addEventListener("click", function (event) {
   displayRecipeCard();
 });
 
-recipeCardClose.addEventListener("click", function (event) {
-  displayRecipeArea();
-  createRecipeCards(activeRecipes);
-});
-
 recipeCardBookmarkAdd.addEventListener("click", function (event) {
   let bookmarkClicked = event.target.id;
   addRecipe(currentUser.id, bookmarkClicked).then((responseData) => {
@@ -108,6 +103,12 @@ recipeCardBookmarkDelete.addEventListener("click", function (event) {
   deleteRecipe(bookmarkClicked, currentUser);
   displayRecipeTag(bookmarkClicked, currentUser, data.recipes);
   activeRecipes = updateActiveRecipes(currentUser, data);
+  // the DOM will be updated on the close of the recipe card
+});
+
+recipeCardClose.addEventListener("click", function (event) {
+  displayRecipeArea();
+  createRecipeCards(activeRecipes);
 });
 
 userSavedRecipes.addEventListener("click", function (event) {
