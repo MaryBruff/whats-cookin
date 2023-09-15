@@ -118,17 +118,6 @@ const displayRecipeArea = () => {
   tagSection.classList.toggle("hidden", false);
 };
 
-const saveRecipe = (id, user) => {
-  user.recipesToCook.push(id);
-};
-
-const deleteRecipe = (idClicked, user) => {
-  let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
-    return recipe === idClicked;
-  });
-  user.recipesToCook.splice(foundRecipeIndex, 1);
-};
-
 const displayRecipeTag = (id, currentUser, recipes) => {
   let savedStatus = currentUser.recipesToCook.includes(id);
   if (savedStatus === true) {
@@ -139,6 +128,21 @@ const displayRecipeTag = (id, currentUser, recipes) => {
     recipeCardBookmarkDelete.classList.toggle("hidden", true);
   }
 };
+
+// Legacy function before post implementation
+// const saveRecipe = (id, user) => {
+//   user.recipesToCook.push(id);
+// };
+
+
+// legacy function still used to remove recipes from the datamodel 
+const deleteRecipe = (idClicked, user) => {
+  let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
+    return recipe === idClicked;
+  });
+  user.recipesToCook.splice(foundRecipeIndex, 1);
+};
+
 
 const buildSearchFail = () => {
   let searchFail = document.createElement("p");
@@ -195,7 +199,7 @@ export {
   buildRecipeCost,
   displayRecipeCard,
   displayRecipeArea,
-  saveRecipe,
+  // saveRecipe,
   deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
