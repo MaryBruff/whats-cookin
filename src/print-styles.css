@@ -1,0 +1,54 @@
+@media print {
+  * {
+    font-size: 12pt;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: black;
+  }
+
+  h1 {
+    color: #21683d;
+    font-family: 'Dancing Script', cursive;
+    font-size: 20pt;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 3%;
+  }
+
+  .main-nav,
+  .tag-area,
+  .icon,
+  .recipe-image-section {
+    display: none;
+  }
+
+  .recipe-card-blowup {
+    border: none;
+    box-shadow: none;
+    margin-left: 10%;
+  }
+
+  #recipeCardTitle {
+    font-size: 20pt;
+  }
+
+  .instructions {
+    font-weight: bolder;
+    font-size: 15pt;
+  }
+
+  .icon-section {
+    display: none;
+  }
+
+  p {
+    widows: 4;
+    orphans: 2;
+  }
+
+  .print-footer {
+    display: block;
+    text-align: center;
+    font-size: 12pt;
+  }
+}
