@@ -49,6 +49,8 @@ h1 {
   line-height: normal;
   margin-bottom: 3%;
   text-shadow: #a5db9c 5px 0 10px;
+  opacity: 1;
+  animation: fadeIn 3s;
 }
 
 .upper-nav-button {
@@ -189,6 +191,18 @@ h1 {
   text-align: center;
   font-size: 12pt;
 }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
 
 /* Hidden Property */
 .hidden {
