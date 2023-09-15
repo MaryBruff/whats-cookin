@@ -74,7 +74,7 @@ const buildRecipeCost = (foundRecipe, ingredients, cost) => {
 
 const buildIngredients = (foundRecipe, ingredients, recipeIngredients) => {
   recipeIngredientsArea.innerHTML = "";
-  
+
   let ingredientAmounts = foundRecipe.ingredients.map((ingredient) => {
     return `${ingredient.quantity.amount} ${ingredient.quantity.unit} `;
   });
@@ -118,17 +118,6 @@ const displayRecipeArea = () => {
   tagSection.classList.toggle("hidden", false);
 };
 
-const saveRecipe = (id, user) => {
-  user.recipesToCook.push(id);
-};
-
-const deleteRecipe = (idClicked, user) => {
-  let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
-    return recipe === idClicked;
-  });
-  user.recipesToCook.splice(foundRecipeIndex, 1);
-};
-
 const displayRecipeTag = (id, currentUser, recipes) => {
   let savedStatus = currentUser.recipesToCook.includes(id);
   if (savedStatus === true) {
@@ -140,6 +129,21 @@ const displayRecipeTag = (id, currentUser, recipes) => {
   }
 };
 
+// Legacy function before post implementation
+// const saveRecipe = (id, user) => {
+//   user.recipesToCook.push(id);
+// };
+
+
+// legacy function still used to remove recipes from the datamodel 
+const deleteRecipe = (idClicked, user) => {
+  let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
+    return recipe === idClicked;
+  });
+  user.recipesToCook.splice(foundRecipeIndex, 1);
+};
+
+
 const buildSearchFail = () => {
   let searchFail = document.createElement("p");
   searchFail.classList.add("error");
@@ -147,6 +151,32 @@ const buildSearchFail = () => {
   recipeArea.appendChild(searchFail);
 };
 
+const updateActiveTags = (tag, activeTags) => {
+  let tagId = tag.id;
+  tag.classList.toggle("tag-active");
+  if (!activeTags.includes(tagId)) {
+    activeTags.push(tagId);
+  } else {
+    let index = activeTags.indexOf(tagId);
+    activeTags.splice(index, 1);
+  }
+  return activeTags;
+};
+
+const updateUser = (users, currentUser) => {
+  return users.find((user) => {
+    if (user.id === currentUser.id) {
+      return user;
+    }
+  });
+};
+
+const updateActiveRecipes = (currentUser, data) => {
+  return currentUser.recipesToCook.map((recipeId) => {
+    let wholeRecipe = locateRecipe(recipeId, data.recipes);
+    return wholeRecipe;
+  });
+};
 // elementsToMakeAccessible.forEach(element => {
 //   element.addEventListener('keydown', function (event) {
 //     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
@@ -169,8 +199,11 @@ export {
   buildRecipeCost,
   displayRecipeCard,
   displayRecipeArea,
-  saveRecipe,
+  // saveRecipe,
   deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
+  updateActiveTags,
+  updateUser,
+  updateActiveRecipes,
 };
