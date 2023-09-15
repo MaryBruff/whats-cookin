@@ -112,7 +112,6 @@ h1 {
 .tag-card {
   cursor: pointer;
   border-radius: 25%;
-  cursor: hover;
   text-shadow: #a5db9c 5px 0 10px;
 }
 
@@ -136,7 +135,6 @@ h1 {
 
 .recipe-card-blowup {
   margin-left: 15%;
-  margin-top: 5%;
   width: 80%;
   border: solid green 2px;
   box-shadow: 10px 10px 5px 3px rgb(8, 50, 8);
@@ -156,6 +154,7 @@ h1 {
 #recipeCardInstructions {
   margin-left: 2%;
   margin-right: 2%;
+  text-align: justify;
 }
 
 .icon-section {
@@ -183,6 +182,12 @@ h1 {
 .error {
   font-size: 30px;
   margin-top: 10%;
+}
+
+.print-footer {
+  display: none;
+  text-align: center;
+  font-size: 12pt;
 }
 
 /* Hidden Property */
