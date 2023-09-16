@@ -13,7 +13,9 @@ const recipeCardBookmarkAdd = document.querySelector(".icon-bookmark");
 const recipeCardBookmarkDelete = document.querySelector(".solid-bookmark");
 const errorMessage = document.querySelector("#error");
 
-// const elementsToMakeAccessible = document.querySelectorAll('[tabindex="0"]'); ///added this query selector for tab 'button' click
+const elementsToMakeAccessible = document.querySelectorAll('[tabindex="0"]');
+
+
 
 import { getIngredientNames, calculateCost } from "../src/recipes.js";
 
@@ -176,18 +178,15 @@ const updateActiveRecipes = (currentUser, data) => {
     return wholeRecipe;
   });
 };
-// elementsToMakeAccessible.forEach(element => {
-//   element.addEventListener('keydown', function (event) {
-//     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-//       event.preventDefault();
-//       element.click();
-//     }
-//   });
-//   //asking chat how to
-//   //how can we identify if something has been click -- another event listener needs to run on this
-//   //click an element with my mouse its running the correct event listener
-//   //but
-// });
+
+elementsToMakeAccessible.forEach(element => {
+  element.addEventListener('keydown', function (event) {
+    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
+      event.preventDefault();
+      element.click();
+    }
+  });
+});
 
 const displayErrorMessage = (userErrorMessage) => {
   errorMessage.classList.toggle("hidden", false);
