@@ -11,6 +11,7 @@ const recipeInstructionsSection = document.querySelector(
 const tagSection = document.querySelector(".tag-area");
 const recipeCardBookmarkAdd = document.querySelector(".icon-bookmark");
 const recipeCardBookmarkDelete = document.querySelector(".solid-bookmark");
+const errorMessage = document.querySelector("#error");
 
 // const elementsToMakeAccessible = document.querySelectorAll('[tabindex="0"]'); ///added this query selector for tab 'button' click
 
@@ -134,15 +135,13 @@ const displayRecipeTag = (id, currentUser, recipes) => {
 //   user.recipesToCook.push(id);
 // };
 
-
-// legacy function still used to remove recipes from the datamodel 
+// legacy function still used to remove recipes from the datamodel
 const deleteRecipe = (idClicked, user) => {
   let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
     return recipe === idClicked;
   });
   user.recipesToCook.splice(foundRecipeIndex, 1);
 };
-
 
 const buildSearchFail = () => {
   let searchFail = document.createElement("p");
@@ -190,6 +189,11 @@ const updateActiveRecipes = (currentUser, data) => {
 //   //but
 // });
 
+const displayErrorMessage = (userErrorMessage) => {
+  errorMessage.classList.toggle("hidden", false);
+  errorMessage.innerText = userErrorMessage;
+};
+
 export {
   createRecipeCards,
   locateRecipe,
@@ -206,4 +210,5 @@ export {
   updateActiveTags,
   updateUser,
   updateActiveRecipes,
+  displayErrorMessage,
 };
