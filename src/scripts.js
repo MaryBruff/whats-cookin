@@ -18,6 +18,7 @@ import {
   updateActiveTags,
   updateUser,
   updateActiveRecipes,
+  displayErrorMessage,
 } from "./domUpdates.js";
 
 import {
@@ -42,6 +43,7 @@ const recipeCardBookmarkAdd = document.querySelector(".icon-bookmark");
 const recipeCardBookmarkDelete = document.querySelector(".solid-bookmark");
 const userSavedRecipes = document.querySelector("#myRecipes");
 const discoverRecipes = document.querySelector("#discoverRecipes");
+const errorMessage = document.querySelector("#error");
 
 // ===== EVENT LISTENERS =====
 
@@ -58,7 +60,13 @@ window.addEventListener("load", function () {
       createRecipeCards(res["2"].recipes);
       activeRecipes = [...res["2"].recipes];
     })
-    .catch((err) => console.log(err));
+    // sorry the network seems busy, please try again later, be sure to make sure your server is running
+    .catch(() => {
+      let userGetErrorMessage =
+        "Sorry the network seems to not be working - make sure the server is running and reload the page";
+      displayErrorMessage(userGetErrorMessage);
+      tagSection.classList.toggle("hidden", true);
+    });
 });
 
 tagSection.addEventListener("click", function (event) {
@@ -89,22 +97,35 @@ recipeArea.addEventListener("click", function (event) {
 
 recipeCardBookmarkAdd.addEventListener("click", function (event) {
   let bookmarkClicked = event.target.id;
-  addRecipe(currentUser.id, bookmarkClicked).then((responseData) => {
-    data.users = responseData;
-    let users = data.users.users;
-    currentUser = updateUser(users, currentUser);
-    // updateUser updates the currentUser with the data from the database not the local DM!!!
-    displayRecipeTag(bookmarkClicked, currentUser, data.recipes);
-  });
+  addRecipe(currentUser.id, bookmarkClicked)
+    .then((responseData) => {
+      data.users = responseData;
+      let users = data.users.users;
+      currentUser = updateUser(users, currentUser);
+      // updateUser updates the currentUser with the data from the database not the local DM!!!
+      displayRecipeTag(bookmarkClicked, currentUser, data.recipes);
+    })
+    .catch(() => {
+      let userPostErrorMessage =
+        "There was a problem saving that recipe, please try a different one";
+      displayErrorMessage(userPostErrorMessage);
+      tagSection.classList.toggle("hidden", true);
+      setTimeout(() => {
+        errorMessage.classList.toggle("hidden", true);
+        tagSection.classList.toggle("hidden", true);
+        displayRecipeArea();
+        createRecipeCards(activeRecipes);
+      }, 1500);
+    });
 });
 
-recipeCardBookmarkDelete.addEventListener("click", function (event) {
-  let bookmarkClicked = event.target.id;
-  deleteRecipe(bookmarkClicked, currentUser);
-  displayRecipeTag(bookmarkClicked, currentUser, data.recipes);
-  activeRecipes = updateActiveRecipes(currentUser, data);
-  // the DOM will be updated on the close of the recipe card
-});
+// recipeCardBookmarkDelete.addEventListener("click", function (event) {
+//   let bookmarkClicked = event.target.id;
+//   deleteRecipe(bookmarkClicked, currentUser);
+//   displayRecipeTag(bookmarkClicked, currentUser, data.recipes);
+//   activeRecipes = updateActiveRecipes(currentUser, data);
+//   // the DOM will be updated on the close of the recipe card
+// });
 
 recipeCardClose.addEventListener("click", function (event) {
   displayRecipeArea();
@@ -117,6 +138,7 @@ userSavedRecipes.addEventListener("click", function (event) {
 });
 
 discoverRecipes.addEventListener("click", function (event) {
+  console.log(data);
   activeRecipes = [...data.recipes];
   createRecipeCards(activeRecipes);
 });

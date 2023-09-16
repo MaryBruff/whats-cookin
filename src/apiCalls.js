@@ -2,7 +2,7 @@ const apiCalls = (dataType) => {
   return fetch(`http://localhost:3001/api/v1/${dataType}`)
     .then((response) => {
       if (!response.ok) {
-        throw new Error(`Network response was not ok: ${response.status}`);
+        throw new Error(`Get network response was not ok: ${response.status}`);
       }
 
       return response.json();
@@ -31,7 +31,9 @@ const addRecipeToUser = (userId, recipeId) => {
   })
     .then((postResponse) => {
       if (!postResponse.ok) {
-        throw new Error(`Network response was not ok: ${postResponse.status}`);
+        throw new Error(
+          `POST network response was not ok: ${postResponse.status}`
+        );
       }
 
       // Wait for the POST request to complete, then make the GET request
@@ -40,7 +42,7 @@ const addRecipeToUser = (userId, recipeId) => {
     .then((getUsersResponse) => {
       if (!getUsersResponse.ok) {
         throw new Error(
-          `Network response was not ok: ${getUsersResponse.status}`
+          `GET network response was not ok: ${getUsersResponse.status}`
         );
       }
 

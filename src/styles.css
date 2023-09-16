@@ -188,7 +188,8 @@ h1 {
 
 .error {
   font-size: 30px;
-  margin-top: 10%;
+  margin-top: 10px;
+  text-align: center;
 }
 
 .print-footer {
