@@ -119,6 +119,7 @@ recipeCardBookmarkAdd.addEventListener("click", function (event) {
     });
 });
 
+// Legacy function before post implementation
 // recipeCardBookmarkDelete.addEventListener("click", function (event) {
 //   let bookmarkClicked = event.target.id;
 //   deleteRecipe(bookmarkClicked, currentUser);
