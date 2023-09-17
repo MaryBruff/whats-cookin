@@ -69,8 +69,14 @@ window.addEventListener("load", function () {
     });
 });
 
-
 tagSection.addEventListener("click", function (event) {
+  handleTagClick(event);
+});
+
+tagSection.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleTagClick(event);
+  }
 });
 
 function handleTagClick(event) {
@@ -81,13 +87,23 @@ function handleTagClick(event) {
 }
 
 searchButton.addEventListener("click", function (event) {
+  handleSearchButton(event);
+});
+
+searchButton.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleSearchButton(event);
+  }
+});
+
+function handleSearchButton(event) {
   let searchTerm = searchInput.value;
   let searchedRecipes = searchRecipes(searchTerm, activeRecipes);
   createRecipeCards(searchedRecipes);
   if (searchedRecipes.length === 0) {
     buildSearchFail();
   }
-});
+}
 
 recipeArea.addEventListener("click", function (event) {
   handleClickedRecipe(event);
@@ -143,14 +159,6 @@ function handleAddRecipe(event) {
     });
 }
 
-// recipeCardBookmarkDelete.addEventListener("click", function (event) {
-//   let bookmarkClicked = event.target.id;
-//   deleteRecipe(bookmarkClicked, currentUser);
-//   displayRecipeTag(bookmarkClicked, currentUser, data.recipes);
-//   activeRecipes = updateActiveRecipes(currentUser, data);
-//   // the DOM will be updated on the close of the recipe card
-// });
-
 recipeCardClose.addEventListener("click", function (event) {
   handleCardClose(event);
 });
@@ -192,7 +200,6 @@ discoverRecipes.addEventListener("keydown", function (event) {
 });
 
 function handleDiscoverRecipes(event) {
-  console.log(data);
   activeRecipes = [...data.recipes];
   createRecipeCards(activeRecipes);
 }
