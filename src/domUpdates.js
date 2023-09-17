@@ -13,8 +13,6 @@ const recipeCardBookmarkAdd = document.querySelector(".icon-bookmark");
 const recipeCardBookmarkDelete = document.querySelector(".solid-bookmark");
 const errorMessage = document.querySelector("#error");
 
-// const elementsToMakeAccessible = document.querySelectorAll('[tabindex="0"]'); ///added this query selector for tab 'button' click
-
 import { getIngredientNames, calculateCost } from "../src/recipes.js";
 
 const createRecipeCards = (recipes) => {

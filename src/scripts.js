@@ -162,6 +162,7 @@ recipeCardClose.addEventListener("click", function (event) {
   handleCardClose(event);
 });
 
+
 recipeCardClose.addEventListener("keydown", function (event) {
   if (event.keyCode === 13) {
     handleCardClose(event);
