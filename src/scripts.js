@@ -12,7 +12,6 @@ import {
   buildRecipeCard,
   displayRecipeCard,
   displayRecipeArea,
-  deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
   updateActiveTags,

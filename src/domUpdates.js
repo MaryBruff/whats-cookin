@@ -130,19 +130,6 @@ const displayRecipeTag = (id, currentUser, recipes) => {
   }
 };
 
-// Legacy function before post implementation
-// const saveRecipe = (id, user) => {
-//   user.recipesToCook.push(id);
-// };
-
-// legacy function still used to remove recipes from the datamodel
-const deleteRecipe = (idClicked, user) => {
-  let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
-    return recipe === idClicked;
-  });
-  user.recipesToCook.splice(foundRecipeIndex, 1);
-};
-
 const buildSearchFail = () => {
   let searchFail = document.createElement("p");
   searchFail.classList.add("error");
@@ -176,18 +163,6 @@ const updateActiveRecipes = (currentUser, data) => {
     return wholeRecipe;
   });
 };
-// elementsToMakeAccessible.forEach(element => {
-//   element.addEventListener('keydown', function (event) {
-//     if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-//       event.preventDefault();
-//       element.click();
-//     }
-//   });
-//   //asking chat how to
-//   //how can we identify if something has been click -- another event listener needs to run on this
-//   //click an element with my mouse its running the correct event listener
-//   //but
-// });
 
 const displayErrorMessage = (userErrorMessage) => {
   errorMessage.classList.toggle("hidden", false);
@@ -203,8 +178,6 @@ export {
   buildRecipeCost,
   displayRecipeCard,
   displayRecipeArea,
-  // saveRecipe,
-  deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
   updateActiveTags,
