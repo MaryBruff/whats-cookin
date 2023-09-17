@@ -69,12 +69,16 @@ window.addEventListener("load", function () {
     });
 });
 
+
 tagSection.addEventListener("click", function (event) {
+});
+
+function handleTagClick(event) {
   let tag = event.target.closest(".tag-card");
   updateActiveTags(tag, activeTags);
   let filteredArray = filterByTag(activeTags, activeRecipes);
   createRecipeCards(filteredArray);
-});
+}
 
 searchButton.addEventListener("click", function (event) {
   let searchTerm = searchInput.value;
@@ -86,6 +90,16 @@ searchButton.addEventListener("click", function (event) {
 });
 
 recipeArea.addEventListener("click", function (event) {
+  handleClickedRecipe(event);
+});
+
+recipeArea.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleClickedRecipe(event);
+  }
+});
+
+function handleClickedRecipe(event) {
   let recipeClicked = event.target.parentElement.id;
   let foundRecipe = locateRecipe(recipeClicked, data.recipes);
   let recipeIngredients = getIngredientNames(foundRecipe, data.ingredients);
@@ -93,9 +107,19 @@ recipeArea.addEventListener("click", function (event) {
   buildRecipeCard(foundRecipe, data.ingredients, recipeIngredients, cost);
   displayRecipeTag(recipeClicked, currentUser, data.recipes);
   displayRecipeCard();
-});
+}
 
 recipeCardBookmarkAdd.addEventListener("click", function (event) {
+  handleAddRecipe(event);
+});
+
+recipeCardBookmarkAdd.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleAddRecipe(event);
+  }
+});
+
+function handleAddRecipe(event) {
   let bookmarkClicked = event.target.id;
   addRecipe(currentUser.id, bookmarkClicked)
     .then((responseData) => {
@@ -117,7 +141,7 @@ recipeCardBookmarkAdd.addEventListener("click", function (event) {
         createRecipeCards(activeRecipes);
       }, 1500);
     });
-});
+}
 
 // recipeCardBookmarkDelete.addEventListener("click", function (event) {
 //   let bookmarkClicked = event.target.id;
@@ -128,20 +152,50 @@ recipeCardBookmarkAdd.addEventListener("click", function (event) {
 // });
 
 recipeCardClose.addEventListener("click", function (event) {
+  handleCardClose(event);
+});
+
+recipeCardClose.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleCardClose(event);
+  }
+});
+
+function handleCardClose(event) {
   displayRecipeArea();
   createRecipeCards(activeRecipes);
-});
+}
 
 userSavedRecipes.addEventListener("click", function (event) {
-  activeRecipes = updateActiveRecipes(currentUser, data);
-  createRecipeCards(activeRecipes);
+  handleSavedRecipes(event);
 });
 
+userSavedRecipes.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleSavedRecipes(event);
+  }
+});
+
+function handleSavedRecipes(event) {
+  activeRecipes = updateActiveRecipes(currentUser, data);
+  createRecipeCards(activeRecipes);
+}
+
 discoverRecipes.addEventListener("click", function (event) {
+  handleDiscoverRecipes(event);
+});
+
+discoverRecipes.addEventListener("keydown", function (event) {
+  if (event.keyCode === 13) {
+    handleDiscoverRecipes(event);
+  }
+});
+
+function handleDiscoverRecipes(event) {
   console.log(data);
   activeRecipes = [...data.recipes];
   createRecipeCards(activeRecipes);
-});
+}
 
 const loadUser = (users) => {
   let randomUserIndex = Math.floor(Math.random() * users.length);
