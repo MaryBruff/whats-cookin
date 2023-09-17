@@ -52,6 +52,7 @@ const buildRecipeImage = (foundRecipe) => {
   let recipeImage = document.createElement("img");
   recipeImage.classList.add("recipe-image-blowup");
   recipeImage.setAttribute("src", foundRecipe.image);
+  recipeImage.setAttribute("alt", `${foundRecipe.name}`);
   recipeImageSection.appendChild(recipeImage);
 };
 
