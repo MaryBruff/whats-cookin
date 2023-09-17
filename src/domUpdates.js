@@ -13,10 +13,6 @@ const recipeCardBookmarkAdd = document.querySelector(".icon-bookmark");
 const recipeCardBookmarkDelete = document.querySelector(".solid-bookmark");
 const errorMessage = document.querySelector("#error");
 
-const elementsToMakeAccessible = document.querySelectorAll('[tabindex="0"]');
-
-
-
 import { getIngredientNames, calculateCost } from "../src/recipes.js";
 
 const createRecipeCards = (recipes) => {
@@ -132,19 +128,6 @@ const displayRecipeTag = (id, currentUser, recipes) => {
   }
 };
 
-// Legacy function before post implementation
-// const saveRecipe = (id, user) => {
-//   user.recipesToCook.push(id);
-// };
-
-// legacy function still used to remove recipes from the datamodel
-const deleteRecipe = (idClicked, user) => {
-  let foundRecipeIndex = user.recipesToCook.findIndex((recipe) => {
-    return recipe === idClicked;
-  });
-  user.recipesToCook.splice(foundRecipeIndex, 1);
-};
-
 const buildSearchFail = () => {
   let searchFail = document.createElement("p");
   searchFail.classList.add("error");
@@ -179,15 +162,6 @@ const updateActiveRecipes = (currentUser, data) => {
   });
 };
 
-elementsToMakeAccessible.forEach(element => {
-  element.addEventListener('keydown', function (event) {
-    if (event.key === ' ' || event.key === 'Spacebar' || event.key === 'Enter') {
-      event.preventDefault();
-      element.click();
-    }
-  });
-});
-
 const displayErrorMessage = (userErrorMessage) => {
   errorMessage.classList.toggle("hidden", false);
   errorMessage.innerText = userErrorMessage;
@@ -202,8 +176,6 @@ export {
   buildRecipeCost,
   displayRecipeCard,
   displayRecipeArea,
-  // saveRecipe,
-  deleteRecipe,
   displayRecipeTag,
   buildSearchFail,
   updateActiveTags,
